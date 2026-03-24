@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  virtual-lover:
+    build: .
+    container_name: virtual-lover-app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./backup:/app/backup
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
